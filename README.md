@@ -1,7 +1,5 @@
-#MyHomeWork
+# MyHomeWork
 
-#项目介绍
-熟悉pytest基本用法
+## 项目介绍
+熟悉pytest
 
-#备注
-....
