@@ -16,4 +16,4 @@ div:
     - [10,0,10]
     - [0.1,1,0.1]
 
-  ids: ['int','bignum','minus','zero','illegal','minus2']
+  ids: ['int','bignum','minus1','zero','illegal','minus2']
