@@ -1,7 +1,7 @@
 import os
 
 from selenium import webdriver
-
+from selenium.webdriver.support.wait import WebDriverWait
 class Base():
     def setup(self):
         """
@@ -17,12 +17,13 @@ class Base():
         #     self.driver = webdriver.Chrome()
 
         chrome_arg = webdriver.ChromeOptions()
+        # 加入调试地址
         chrome_arg.debugger_address = '127.0.0.1:9222'
-        # self.driver = webdriver.Chrome(options=chrome_arg)    # 复用浏览器
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(options=chrome_arg)    # 复用浏览器
+        # self.driver = webdriver.Chrome()
         # self.vars = {}
-        self.driver.implicitly_wait(5)
-        self.driver.maximize_window()
+        # self.driver.implicitly_wait(5)
+        # self.driver.maximize_window()
 
     def teardown(self):
         self.driver.quit()

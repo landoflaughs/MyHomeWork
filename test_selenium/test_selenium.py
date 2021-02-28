@@ -1,53 +1,14 @@
 import json
 from time import sleep
-
 import selenium
 from selenium import webdriver
-
-# def test_selenium():
-#     driver = webdriver.Chrome()
-#     driver.get('https://www.baidu.com/')
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from test_selenium.base import Base
 
 
-class TestChromeLoginTmp(Base):
-    # def setup(self):
-    #     self.driver = webdriver.Chrome()
-    #     self.driver.get('https://www.baidu.com/')
-    #     self.driver.implicitly_wait(5)
-    #
-    # def teardown(self):
-    #     self.driver.quit()
-    #
-    # def test_baidu(self):
-    #
-    #     self.driver.find_element(By.ID, 'kw').send_keys('霍格沃兹测试学院')
-    #
-    #     self.driver.find_element(By.ID, 'su').click()
-    #
-    #     self.driver.find_element(By.LINK_TEXT, '霍格沃兹测试学院 - 主页').click()
-    # def setup(self):
-    #     self.driver = webdriver.Chrome()
-    #     self.driver.get('https://ceshiren.com/')
-    #     self.driver.implicitly_wait(3)
-
-    # def test_wait(self):
-    #     self.driver.find_element(By.XPATH, '//*[@title="原创精华文章,有100元奖金"]').click()
-    #     # def wait(x):
-    #     #     return len(self.driver.find_elements(By.XPATH, '//*[@class="d-button-label"]')) >= 1
-    #     # WebDriverWait(self.driver, 10).until(wait)
-    #     WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@class="d'
-    #                                                                                                 '-button-label"]')))
-    #     self.driver.find_element(By.XPATH, '//*[@title="有了新帖的活动主题"]').click()
-
-    # def test_main_tmp(self):
-    #     self.driver.get("https://work.weixin.qq.com/")
-    #     self.driver.find_element(By.XPATH, "//*[@class='index_top_operation_loginBtn']").click()
-    #     self.driver.find_element(By.XPATH, "//*[@class='login_registerBar_link']").click()
-
+class TestChromeLoginTmp:
     def test_login_tmp(self):
         """
         基于浏览器复用后的内容进行操作
@@ -55,8 +16,36 @@ class TestChromeLoginTmp(Base):
         - 然后执行python代码
         :return:
         """
-        self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
+        chrome_arg = webdriver.ChromeOptions()
+        chrome_arg.debugger_address = '127.0.0.1:9222'        # 加入调试地址
+        self.driver = webdriver.Chrome(options=chrome_arg)    # 复用浏览器
+        # self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
+        self.driver.implicitly_wait(5)
+
         self.driver.find_element(By.XPATH, "//*[@id='menu_contacts']").click()
+
+        # 不可交互
+        # 1.元素被阻挡，元素前面还有其他不可见元素
+        # 2. 元素有多个，需要人工挑选合适的元素
+        def wait_name(driver):
+            '''
+            判断是否进入了添加成员页面，没有则继续按添加成员按钮
+            :param driver:
+            :return:
+            '''
+            eles = driver.find_elements(By.XPATH, "//*[@class='qui_btn ww_btn js_add_member']")
+            eles[-1].click()
+            eles = driver.find_elements(By.XPATH, "//*[@class='qui_btn ww_btn ww_btn_Blue js_btn_continue']")
+            return len(eles) > 0
+            # 对于多元素的查找，有可能会出现找不到元素的情况，在运行之前，手动刷新下页面即可（或自动化）
+        # 显示等待
+        # 如果显示等待中传入了driver,那么代表隐式等待也会生效
+        WebDriverWait(self.driver, 10).until(wait_name)
+
+        self.driver.find_element(By.XPATH, "//*[@id='username']").send_keys('星期日')
+        self.driver.find_element(By.XPATH, "//*[@id='memberAdd_acctid']").send_keys('sunday')
+        self.driver.find_element(By.XPATH, "//*[@id='memberAdd_phone']").send_keys('13334534444')
+        self.driver.find_element(By.XPATH, "//*[@class='qui_btn ww_btn js_btn_save']").click()
 
 
     def test_cookie_tmp(self):

@@ -1,5 +1,4 @@
 import sys
-
 import allure
 import pytest
 import yaml
