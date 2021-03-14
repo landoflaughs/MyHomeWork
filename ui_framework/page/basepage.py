@@ -9,17 +9,18 @@ class BasePage:
     def __init__(self, driver:WebDriver=None):
         self.driver = driver
 
-    def black_list(self,param):
+    def black_list(func):
         black_list = ['//*[@resource-id="com.xueqiu.android:id/iv_close"]']
         def is_in_blacklist(*args, **kwargs):
+            self = args[0]
             try:
-                return param(*args, **kwargs)
+                return func(*args, **kwargs)
             except Exception:
                 for ele_xpath in black_list:
                     eles = self.finds(MobileBy.XPATH, ele_xpath)
                     if len(eles) > 0:
                         eles[0].click()
-                        return param(*args, **kwargs)    # 递归调用
+                        return func(*args, **kwargs)    # 递归调用
         return is_in_blacklist
 
     @black_list
