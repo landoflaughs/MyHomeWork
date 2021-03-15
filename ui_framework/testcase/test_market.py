@@ -11,4 +11,4 @@ class TestMarket:
         pass
 
     def test_goto_market(self):
-        self.main.goto_market()
+        self.main.goto_market().goto_search().search()
