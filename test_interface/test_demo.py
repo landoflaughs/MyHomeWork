@@ -23,7 +23,7 @@ class TestAddress:
         url = f'https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token={self.token}'
         data = {
             "userid": "kenan",
-            "name": "온켓",
+            "name": "온켓1",
             "alias": "jackzhang",
             "mobile": "+86 13800000000",
             "department": [1]
