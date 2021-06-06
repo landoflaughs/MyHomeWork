@@ -1,4 +1,5 @@
 # -*- coding: gbk -*-
+from flask_cors import CORS
 from flask import Flask, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
@@ -16,6 +17,8 @@ db = SQLAlchemy(app)
 # 将flask实例加载到flask-restful
 api = Api(app)
 app.config["SECRET_KEY"] = "TMP123"
+# 使用CORS 解决同源问题
+CORS(app)
 
 # 全局导入产生 冲突，因此定义函数，局部引用
 def router():
