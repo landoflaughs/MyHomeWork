@@ -4,6 +4,7 @@
       app
       color="primary"
       dark
+      clipped-left
     >
       <div class="d-flex align-center">
         <v-img
@@ -37,9 +38,9 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main>
-      <router-view/>
-    </v-main>
+    <!-- 展示路由的地方 -->
+    <router-view/>
+    
   </v-app>
 </template>
 

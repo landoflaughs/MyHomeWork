@@ -1,5 +1,6 @@
 <template>
   <!-- class 属性，可以设置样式 -->
+  <v-main><!--放到main组件里，避免组件和其他组件重叠-->
   <div class="login">
     <h1>登陆</h1>
     <v-text-field
@@ -20,6 +21,7 @@
     <!-- @ 是 vue 的语法，将 click 事件绑定到一个函数  -->
     <v-btn depressed @click="goSignUp()"> 注册 </v-btn>
   </div>
+  </v-main><!--放到main组件里，避免组件和其他组件重叠-->
 </template>
 <script>
 export default {
@@ -40,9 +42,10 @@ export default {
         // =>函数：se6函数，定义一个匿名函数,好处是使用当前环境
         this.$api.user.login(loginData).then(response=> {
             // localstorage是存储到浏览器中的一个数据，全局可用
-            localStorage.setItem("token", response.data.access_token);
-            console.log(response);
-
+            if (response.status == 200) {
+              localStorage.setItem("token", response.data.access_token);
+              this.$router.push({ name: "TestCase" })
+            }
         });
         this.$api.testcase.getTestcase().then(response => {
             console.log(response);

@@ -1,5 +1,6 @@
 <template>
   <!-- class 属性，可以设置样式 -->
+  <v-main>
   <div class="sign-up">
     <h1>注册</h1>
     <v-text-field
@@ -25,6 +26,7 @@
     <v-btn depressed color="primary"> 注册 </v-btn>
     <v-btn depressed @click="goLogin()"> 登陆 </v-btn>
   </div>
+  </v-main>
 </template>
 <script>
 export default {
