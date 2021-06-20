@@ -1,4 +1,5 @@
 import axios from "axios"
+import router from "../router";
 
 //创建axios的实例
 const instance = axios.create({
@@ -15,6 +16,22 @@ instance.interceptors.request.use(function(config) {
     }
     return config;
 });
+// 如果发送的请求，响应信息内有错误，会回调error的内容
+instance.interceptors.response.use((response) => {
+    return response;
+  },  (error)=> {
+    // 如果请求结果状态码是401的话，代表校验失败，就跳转回login
+    // 同时清理token
+    if (error.response) {
+        if(error.response.status == 401) {
+            // 清除token
+            localStorage.removeItem("token");
+            router.replace({"name": "Login"});
+            console.log("123")
+            return Promise.reject(error);
+        }
+    }
+  });
 
 // 导入实例  
 export default instance;

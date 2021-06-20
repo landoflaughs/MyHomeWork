@@ -4,6 +4,8 @@ from flask import Flask, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
+
+
 host = '192.168.202.128'
 user = 'root'
 password = 'root'
@@ -24,11 +26,15 @@ CORS(app)
 def router():
     from backend.api.login import Login
     from backend.api.testcase import TestCaseAdd, TestCaseUpdate, TestCaseGet, TestCaseDelete
+    from backend.api.signup import SignUp
+    from backend.api.testcase import TestCaseRun
     api.add_resource(Login, '/login')
+    api.add_resource(SignUp, '/signup')
     api.add_resource(TestCaseAdd, '/testcase/add')
     api.add_resource(TestCaseDelete, '/testcase/delete')
     api.add_resource(TestCaseGet, '/testcase/get')
     api.add_resource(TestCaseUpdate, '/testcase/update')
+    api.add_resource(TestCaseRun, '/testcase/run')
 
 
 if __name__ == '__main__':

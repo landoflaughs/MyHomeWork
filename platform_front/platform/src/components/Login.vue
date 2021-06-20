@@ -20,6 +20,7 @@
     <v-btn depressed color="primary" @click="login()"> 登陆 </v-btn>
     <!-- @ 是 vue 的语法，将 click 事件绑定到一个函数  -->
     <v-btn depressed @click="goSignUp()"> 注册 </v-btn>
+    <v-btn depressed @click="delToken()"> 清除token </v-btn>
   </div>
   </v-main><!--放到main组件里，避免组件和其他组件重叠-->
 </template>
@@ -55,6 +56,9 @@ export default {
       // this.$router.push：把一个路由推入栈
       this.$router.push({ name: "SignUp" });
     },
+    delToken() {
+      localStorage.removeItem("token");
+    }
   },
 };
 </script>

@@ -18,7 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(30), unique=False, nullable=False)
     email = db.Column(db.String(30), unique=False, nullable=False)
-    time = db.Column(db.Time(), unique=False, nullable=False)
+    time = db.Column(db.Time(), unique=False, nullable=True)
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -59,8 +59,8 @@ class User(db.Model):
 
 
 if __name__ == "__main__":
-    # 删库
+    ## 删库
     # db.drop_all()
-    # 在远程数据库中创建表
+    ## 在远程数据库中创建表
     # db.create_all()
     pass

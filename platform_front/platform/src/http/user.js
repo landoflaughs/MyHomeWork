@@ -5,6 +5,10 @@ const user = {
         // 使用axios的get方法发送get请求，auth代表校验，和requests的auth相同
         return axios.get("/login", {auth: loginData});
     },
+    signUp(signUpData) {
+        // 使用axios的get方法发送get请求，auth代表校验，和requests的auth相同
+        return axios.post("/signup", signUpData);
+    },
 };
 
 export default user

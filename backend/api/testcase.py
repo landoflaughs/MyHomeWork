@@ -1,5 +1,6 @@
 # restful 插件支持把get和post定义为类
 # 定义用例接口
+import jenkins
 from flask import request
 from flask_restful import Resource
 
@@ -77,3 +78,12 @@ class TestCaseUpdate(Resource):
         testcase.description = request_body.get("description")
         db.session.commit()
         return {"msg": "updated!"}
+
+class TestCaseRun(Resource):
+    # get 方法代表接受get请求
+    method_decorators = [auth.login_required]
+    def get(self):
+        server = jenkins.Jenkins('http://192.168.202.128', username="admin",
+                                 password="1126197eb07ec9dbcc354a41d4abb943a9")
+        server.build_job("cekai17")
+        return {"msg": 'ok', "errcode": 200}
