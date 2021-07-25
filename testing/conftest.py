@@ -8,7 +8,7 @@ import yaml
 
 
 def get_datas(name, type='int'):
-    with open('./testing/data/cal_add.yml', encoding='utf-8') as f:
+    with open(r'D:\PyCharmWork\MyHomeWork\testing\data\cal_add.yml', encoding='utf-8') as f:
         all_datas = yaml.safe_load(f)
     datas = all_datas[name][type]['datas']
     ids = all_datas[name][type]['ids']
