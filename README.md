@@ -1,8 +1,5 @@
-# MyHomeWork
+# PythonTestWork
 
 ## 项目介绍
-###熟悉pytest基本用法
+###pytest,selenium，appium，接口自动化测试等工具的练习，使用
 
-## 备注
-### 使用pytest.fixture优化测试用例
-### 打包hook
